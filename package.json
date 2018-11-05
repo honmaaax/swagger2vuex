@@ -1,0 +1,35 @@
+{
+  "name": "swagger2vuex",
+  "version": "0.1.0",
+  "description": "JavaScript code generator that can generate Vuex files from a Swagger file.",
+  "bin": {
+    "swagger2vuex": "bin/swagger2vuex.sh"
+  },
+  "scripts": {
+    "start": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/honmaaax/swagger2vuex.git"
+  },
+  "keywords": [
+    "swagger",
+    "vue",
+    "vuex",
+    "javascript"
+  ],
+  "author": "honmaaax",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/honmaaax/swagger2vuex/issues"
+  },
+  "homepage": "https://github.com/honmaaax/swagger2vuex#readme",
+  "devDependencies": {
+    "webpack": "^4.24.0",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "commander": "^2.19.0",
+    "lodash": "^4.17.11"
+  }
+}
