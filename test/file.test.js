@@ -1,3 +1,5 @@
+import fs from 'fs'
+import Promise from 'bluebird'
 import _ from 'lodash'
 
 import { readFile, writeFile } from '../src/file'
@@ -41,7 +43,21 @@ describe('readFile', ()=>{
 
 describe('writeFile', ()=>{
   it('returns Promise', () => {
-    expect(_.get(writeFile('./test/dist.txt', 'hoge'), 'then')).toBeTruthy()
-    expect(_.isFunction(writeFile('./test/dist.txt', 'hoge').then)).toBeTruthy()
+    const PATH = './test/dist.txt'
+    expect(_.get(writeFile(PATH, 'hoge'), 'then')).toBeTruthy()
+    expect(_.isFunction(writeFile(PATH, 'hoge').then)).toBeTruthy()
+  })
+  it('updates a file', () => {
+    const PATH = './test/dist2.txt'
+    return Promise.promisify(fs.writeFile)(PATH, 'hoge')
+      .then(()=>Promise.promisify(fs.readFile)(PATH, 'utf-8'))
+      .then((res)=>{
+        expect(res).toBe('hoge')
+        return writeFile(PATH, 'fuga')
+      })
+      .then(()=>Promise.promisify(fs.readFile)(PATH, 'utf-8'))
+      .then((res)=>{
+        expect(res).toBe('fuga')
+      })
   })
 })
