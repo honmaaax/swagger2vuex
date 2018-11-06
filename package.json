@@ -6,7 +6,8 @@
     "swagger2vuex": "bin/swagger2vuex.sh"
   },
   "scripts": {
-    "start": "webpack"
+    "start": "webpack",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,10 @@
   },
   "homepage": "https://github.com/honmaaax/swagger2vuex#readme",
   "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.6.0",
     "webpack": "^4.24.0",
     "webpack-cli": "^3.1.2"
   },
