@@ -9,9 +9,8 @@ export function buildActionParams({ basePath, paths, definitions }) {
         .map('name')
         .value()
       const hasPathParams = _.size(pathParams)
-      return _.map(spath, (details, method)=>{
+      return _.map(spath, ({ responses, parameters }, method)=>{
         if (method === 'parameters') return;
-        const { responses, parameters } = details
         const actionName = formatUrlToActionName(fullUrl, method)
         const hasQuery = _.some(parameters, {in: 'query'})
         const hasBody = _.some(parameters, {in: 'body'})
