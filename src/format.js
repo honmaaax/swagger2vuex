@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import Case from 'case'
 
 export function formatUrlToActionName(url, method) {
