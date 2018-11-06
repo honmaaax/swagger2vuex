@@ -4,8 +4,7 @@ import _ from 'lodash'
 import yaml from 'js-yaml'
 
 export function readFile(filePath) {
-  return Promise.promisify(fs.readFile)(filePath)
-    .then((buf)=>buf.toString())
+  return Promise.promisify(fs.readFile)(filePath, 'utf-8')
     .then(yaml.safeLoad)
     .then((result)=>{
       if (!_.isObject(result)) throw new Error('Invalid File')
