@@ -1,6 +1,6 @@
 {
   "name": "swagger2vuex",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "description": "JavaScript code generator that can generate Vuex files from a Swagger file.",
   "bin": {
     "swagger2vuex": "bin/swagger2vuex.sh"
