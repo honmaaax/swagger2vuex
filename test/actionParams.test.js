@@ -7,7 +7,7 @@ import {
 } from '../src/actionParams'
 
 describe('buildActionParams', ()=>{
-  it('returns an array that includes strings', () => {
+  it('returns an array that includes objects', () => {
     return Promise.promisify(fs.readFile)('./test/assets/swagger.json', 'utf-8')
       .then(JSON.parse)
       .then((swagger)=>{
