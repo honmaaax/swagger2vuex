@@ -1,5 +1,5 @@
 # swagger2vuex
-JavaScript code generator that is generatable Vuex files from a Swagger file.
+JavaScript code generator that can generate Vuex files from a Swagger file.
 
 ## Install
 `npm i -g swagger2vuex` or `yarn global add swagger2vuex`
