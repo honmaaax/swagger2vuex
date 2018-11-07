@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import { formatUrlToActionName, formatActionNameToConstant, formatActionNameToCamel } from './format'
 
 export function buildActionParams({ basePath, paths, definitions }) {
@@ -8,7 +10,7 @@ export function buildActionParams({ basePath, paths, definitions }) {
         .filter({in: 'path'})
         .map('name')
         .value()
-      const hasPathParams = _.size(pathParams)
+      const hasPathParams = !!_.size(pathParams)
       return _.map(spath, ({ responses, parameters }, method)=>{
         if (method === 'parameters') return;
         const actionName = formatUrlToActionName(fullUrl, method)
