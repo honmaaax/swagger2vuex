@@ -10,7 +10,8 @@ JavaScript code generator that can generate Vuex files from a Swagger file.
 ## Example
 `swagger2vuex ./docs/swagger.yml ./src/dist.js`
 
-```yaml:./docs/swagger.yml
+**./docs/swagger.yml**
+```
 ---
 swagger: "2.0"
 info:
@@ -137,7 +138,8 @@ paths:
 
 ```
 
-```javascript:./src/APIActions.js
+**./src/APIActions.js**
+```
 export const types = [
   'GET_V2_USERS',
   'POST_V2_USERS',
@@ -186,7 +188,8 @@ export function deleteV2UserById (context, id) {
 }
 ```
 
-```javascript:./src/index.js
+**./src/index.js**
+```
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
