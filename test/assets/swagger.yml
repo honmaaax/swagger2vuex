@@ -79,7 +79,7 @@ paths:
           description: Created
           schema:
             $ref: "#/definitions/user"
-  /product/{id}:
+  /user/{id}:
     parameters:
       - type: integer
         format: int64

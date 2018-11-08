@@ -121,7 +121,7 @@
         }
       }
     },
-    "/product/{id}": {
+    "/user/{id}": {
       "parameters": [
         {
           "type": "integer",
