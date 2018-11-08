@@ -138,7 +138,7 @@ paths:
 
 ```
 
-**./src/APIActions.js**
+**./src/APIActions.js** *(Generated)*
 ```
 export const types = [
   'GET_V2_USERS',
