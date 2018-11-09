@@ -35296,12 +35296,12 @@ function formatActionNameToCamel(actionName) {
   return Case_default.a.camel(actionName.join('_'))
 }
 
-// CONCATENATED MODULE: ./src/actionParams.js
+// CONCATENATED MODULE: ./src/vuexParams.js
 
 
 
 
-function buildActionParams({ basePath, paths, definitions }) {
+function buildVuexParams({ basePath, paths, definitions }) {
   return lodash_default.a.chain(paths)
     .map((spath, url)=>{
       const fullUrl = `${basePath}${url}`
@@ -35310,11 +35310,15 @@ function buildActionParams({ basePath, paths, definitions }) {
         .map('name')
         .value()
       const hasPathParams = !!lodash_default.a.size(pathParams)
-      return lodash_default.a.map(spath, ({ responses, parameters }, method)=>{
+      return lodash_default.a.map(spath, (api, method)=>{
         if (method === 'parameters') return;
+        const { responses, parameters } = api
+        const xVuexKey = api['x-vuex-key']
         const actionName = formatUrlToActionName(fullUrl, method)
         const hasQuery = lodash_default.a.some(parameters, {in: 'query'})
         const hasBody = lodash_default.a.some(parameters, {in: 'body'})
+        const stateKey = lodash_default.a.isString(xVuexKey) ? [[xVuexKey]] :
+          lodash_default.a.isPlainObject(xVuexKey) ? lodash_default.a.toPairs(xVuexKey) : []
         const args = ['context']
         const options = []
         if (hasPathParams) {
@@ -35335,6 +35339,7 @@ function buildActionParams({ basePath, paths, definitions }) {
           hasBody,
           actionName: formatActionNameToCamel(actionName),
           mutationType: formatActionNameToConstant(actionName),
+          stateKey,
           args: args.join(', '),
           options: lodash_default.a.size(options) ? `{${options.join(', ')}}` : undefined,
         }
@@ -35362,7 +35367,16 @@ ${actionParams.map(({ method, url, hasQuery, hasBody, actionName, mutationType, 
       return res.data
     })
 }`
-  )).join('\n')}`
+  )).join('\n')}
+
+export const mutations = {
+${actionParams.map(({ mutationType, stateKey })=>(
+`  [types.${mutationType}]: function (state, payload) {
+${stateKey.map(([ pKey, sKey ])=>(`    state.${sKey} = payload${pKey ? `['${pKey}']` : ''}`)).join('\n')}
+  },`
+    )).join('\n')}
+}
+`
 }
 
 // CONCATENATED MODULE: ./src/index.js
@@ -35385,7 +35399,7 @@ if (
 }
 const [ inputFilePath, src_outputFilePath ] = commander_default.a.args
 readFile(inputFilePath)
-  .then(buildActionParams)
+  .then(buildVuexParams)
   .then(generateCode)
   .then((code)=>writeFile(src_outputFilePath, code))
   .then(()=>console.log(`Generated! => ${src_outputFilePath}`))

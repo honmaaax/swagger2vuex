@@ -95,6 +95,9 @@
               }
             }
           }
+        },
+        "x-vuex-key": {
+          "data": "users"
         }
       },
       "post": {
@@ -150,6 +153,9 @@
               }
             }
           }
+        },
+        "x-vuex-key": {
+          "data": "user"
         }
       },
       "put": {
@@ -174,7 +180,8 @@
               "$ref": "#/definitions/user"
             }
           }
-        }
+        },
+        "x-vuex-key": "user"
       },
       "delete": {
         "summary": "Delete a user by user ID",

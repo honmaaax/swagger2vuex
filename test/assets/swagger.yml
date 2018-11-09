@@ -65,6 +65,8 @@ paths:
               total:
                 type: integer
                 format: int64
+      x-vuex-key:
+        data: users
     post:
       summary: Add a user
       tags:
@@ -100,6 +102,8 @@ paths:
             properties:
               data:
                 $ref: "#/definitions/user"
+      x-vuex-key:
+        data: user
     put:
       summary: Update a user by user ID
       tags:
@@ -115,6 +119,8 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/user"
+      x-vuex-key:
+        data: user
     delete:
       summary: Delete a user by user ID
       tags:

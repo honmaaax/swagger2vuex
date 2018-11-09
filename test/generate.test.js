@@ -14,6 +14,7 @@ describe('generateCode', ()=>{
       hasQuery: true,
       method: 'get',
       mutationType: 'GET_V2_USERS',
+      stateKey: [['data', 'users']],
       options: '{params: query}',
       url: '/v2/users',
     }]
@@ -32,7 +33,14 @@ export function getV2Users (context, query) {
       context.commit(types.GET_V2_USERS, res.data)
       return res.data
     })
-}`
+}
+
+export const mutations = {
+  [types.GET_V2_USERS]: function (state, payload) {
+    state.users = payload['data']
+  },
+}
+`
     )
   })
 })

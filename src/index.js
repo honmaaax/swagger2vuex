@@ -2,7 +2,7 @@ import program from 'commander'
 import _ from 'lodash'
 
 import { readFile, writeFile } from './file'
-import { buildActionParams } from './actionParams'
+import { buildVuexParams } from './vuexParams'
 import { generateCode } from './generate'
 
 program
@@ -17,7 +17,7 @@ if (
 }
 const [ inputFilePath, outputFilePath ] = program.args
 readFile(inputFilePath)
-  .then(buildActionParams)
+  .then(buildVuexParams)
   .then(generateCode)
   .then((code)=>writeFile(outputFilePath, code))
   .then(()=>console.log(`Generated! => ${outputFilePath}`))

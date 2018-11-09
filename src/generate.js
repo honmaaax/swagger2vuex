@@ -14,5 +14,14 @@ ${actionParams.map(({ method, url, hasQuery, hasBody, actionName, mutationType, 
       return res.data
     })
 }`
-  )).join('\n')}`
+  )).join('\n')}
+
+export const mutations = {
+${actionParams.map(({ mutationType, stateKey })=>(
+`  [types.${mutationType}]: function (state, payload) {
+${stateKey.map(([ pKey, sKey ])=>(`    state.${sKey} = payload${pKey ? `['${pKey}']` : ''}`)).join('\n')}
+  },`
+    )).join('\n')}
+}
+`
 }
