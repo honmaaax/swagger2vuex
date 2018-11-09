@@ -258,19 +258,13 @@ export function deleteV2UserById (context, id) {
 
 export const mutations = {
   [types.GET_V2_USERS]: function (state, payload) {
-    state.channels = payload
-  },
-  [types.POST_V2_USERS]: function (state, payload) {
-    state.channels = payload
+    state.users = payload['data']
   },
   [types.GET_V2_USER_BY_ID]: function (state, payload) {
-    state.channels = payload
+    state.user = payload['data']
   },
   [types.PUT_V2_USER_BY_ID]: function (state, payload) {
-    state.channels = payload
-  },
-  [types.DELETE_V2_USER_BY_ID]: function (state, payload) {
-    state.channels = payload
+    state.user = payload['data']
   },
 }
 
