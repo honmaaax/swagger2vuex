@@ -14,7 +14,7 @@ describe('generateCode', ()=>{
       hasQuery: true,
       method: 'get',
       mutationType: 'GET_V2_USERS',
-      stateKey: [['data', 'users']],
+      stateKey: [['data', 'users'], ['total', 'usersTotalCount']],
       options: '{params: query}',
       url: '/v2/users',
     }]
@@ -38,6 +38,7 @@ export function getV2Users (context, query) {
 export const mutations = {
   [types.GET_V2_USERS]: function (state, payload) {
     state.users = payload['data']
+    state.usersTotalCount = payload['total']
   },
 }
 `

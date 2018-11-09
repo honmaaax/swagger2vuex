@@ -97,7 +97,8 @@
           }
         },
         "x-vuex-key": {
-          "data": "users"
+          "data": "users",
+          "total": "usersTotalCount"
         }
       },
       "post": {

@@ -67,6 +67,7 @@ paths:
                 format: int64
       x-vuex-key:
         data: users
+        total: usersTotalCount
     post:
       summary: Add a user
       tags:

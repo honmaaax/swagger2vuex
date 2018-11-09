@@ -259,6 +259,7 @@ export function deleteV2UserById (context, id) {
 export const mutations = {
   [types.GET_V2_USERS]: function (state, payload) {
     state.users = payload['data']
+    state.usersTotalCount = payload['total']
   },
   [types.GET_V2_USER_BY_ID]: function (state, payload) {
     state.user = payload['data']
