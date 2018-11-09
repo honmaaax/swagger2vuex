@@ -35304,7 +35304,7 @@ function formatActionNameToCamel(actionName) {
 function buildVuexParams({ basePath, paths, definitions }) {
   return lodash_default.a.chain(paths)
     .map((spath, url)=>{
-      const fullUrl = `${basePath}${url}`
+      const fullUrl = basePath && basePath !== '/' ? `${basePath}${url}` : url
       const pathParams = lodash_default.a.chain(spath.parameters)
         .filter({in: 'path'})
         .map('name')

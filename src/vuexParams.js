@@ -5,7 +5,7 @@ import { formatUrlToActionName, formatActionNameToConstant, formatActionNameToCa
 export function buildVuexParams({ basePath, paths, definitions }) {
   return _.chain(paths)
     .map((spath, url)=>{
-      const fullUrl = `${basePath}${url}`
+      const fullUrl = basePath && basePath !== '/' ? `${basePath}${url}` : url
       const pathParams = _.chain(spath.parameters)
         .filter({in: 'path'})
         .map('name')

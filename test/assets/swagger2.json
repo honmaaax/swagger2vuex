@@ -1,0 +1,200 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "APIs for testing",
+    "title": "Test APIs",
+    "version": "1.0.0"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "definitions": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "staff",
+        "visitor"
+      ]
+    },
+    "user": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/users": {
+      "get": {
+        "summary": "Find users",
+        "tags": [
+          "users"
+        ],
+        "operationId": "findUsers",
+        "parameters": [
+          {
+            "name": "keyword",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "+id",
+              "-id"
+            ]
+          },
+          {
+            "name": "perpage",
+            "in": "query",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/user"
+                  }
+                },
+                "total": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        },
+        "x-vuex-key": {
+          "data": "users",
+          "total": "usersTotalCount"
+        }
+      },
+      "post": {
+        "summary": "Add a user",
+        "tags": [
+          "users"
+        ],
+        "operationId": "addUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "parameters": [
+        {
+          "type": "integer",
+          "format": "int64",
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get a user by user ID",
+        "tags": [
+          "users"
+        ],
+        "operationId": "getUser",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "$ref": "#/definitions/user"
+                }
+              }
+            }
+          }
+        },
+        "x-vuex-key": {
+          "data": "user"
+        }
+      },
+      "put": {
+        "summary": "Update a user by user ID",
+        "tags": [
+          "users"
+        ],
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        },
+        "x-vuex-key": "user"
+      },
+      "delete": {
+        "summary": "Delete a user by user ID",
+        "tags": [
+          "users"
+        ],
+        "operationId": "deleteUser",
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          }
+        }
+      }
+    }
+  }
+}

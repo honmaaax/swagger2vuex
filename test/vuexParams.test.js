@@ -31,9 +31,25 @@ describe('buildVuexParams', ()=>{
         expect(results[0].hasQuery).toBe(true)
         expect(results[0].method).toBe('get')
         expect(results[0].mutationType).toBe('GET_V2_USERS')
-        expect(results[0].stateKey).toEqual([['data', 'users']])
+        expect(results[0].stateKey).toEqual([['data', 'users'], ['total', 'usersTotalCount']])
         expect(results[0].options).toBe('{params: query}')
         expect(results[0].url).toBe('/v2/users')
+      })
+  })
+  it('return valid url when the basePath is assigned undefined', () => {
+    return Promise.promisify(fs.readFile)('./test/assets/swagger2.json', 'utf-8')
+      .then(JSON.parse)
+      .then((swagger)=>{
+        const results = buildVuexParams(swagger)
+        expect(results[0].url).toBe('/users')
+      })
+  })
+  it('return valid url when the basePath is assigned slash only', () => {
+    return Promise.promisify(fs.readFile)('./test/assets/swagger3.json', 'utf-8')
+      .then(JSON.parse)
+      .then((swagger)=>{
+        const results = buildVuexParams(swagger)
+        expect(results[0].url).toBe('/users')
       })
   })
 })
