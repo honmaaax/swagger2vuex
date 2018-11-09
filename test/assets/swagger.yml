@@ -54,13 +54,14 @@ paths:
           format: int32
       responses:
         200:
+          description: OK
           schema:
             type: object
             properties:
               data:
                 type: array
                 items:
-                  $ref: "#/definitions/users"
+                  $ref: "#/definitions/user"
               total:
                 type: integer
                 format: int64
@@ -93,6 +94,7 @@ paths:
       operationId: getUser
       responses:
         200:
+          description: OK
           schema:
             type: object
             properties:

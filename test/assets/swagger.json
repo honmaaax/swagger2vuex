@@ -78,13 +78,14 @@
         ],
         "responses": {
           "200": {
+            "description": "OK",
             "schema": {
               "type": "object",
               "properties": {
                 "data": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/users"
+                    "$ref": "#/definitions/user"
                   }
                 },
                 "total": {
@@ -139,6 +140,7 @@
         "operationId": "getUser",
         "responses": {
           "200": {
+            "description": "OK",
             "schema": {
               "type": "object",
               "properties": {
