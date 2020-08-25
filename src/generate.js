@@ -33,15 +33,15 @@ export function init (a) { ajax = a }
 
 ${actionParams.map(({ method, url, hasQuery, hasBody, actionName, mutationType, args, options })=>(
 `export function ${actionName} (${args}) {
-  context.commit(types.${mutationType.setEntityIsLoading}, res.data)
+  context.commit('${mutationType.setEntityIsLoading}', res.data)
 
   return ajax.${method}(\`${url}\`${hasBody ? ', body' : ''}${options ? `, ${options}` : ''})
     .then(function(res){
-      context.commit(types.${mutationType.setEntity}, res.data)
+      context.commit('${mutationType.setEntity}', res.data)
       return res.data
     })
     .catch(err => {
-      context.commit(types.${mutationType.setEntityAPIError}, err)
+      context.commit('${mutationType.setEntityAPIError}', err)
     })
 }`
   )).join('\n')}

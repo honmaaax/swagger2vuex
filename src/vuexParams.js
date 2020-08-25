@@ -1,6 +1,6 @@
 import _ from 'lodash'
 
-import { formatUrlToActionName, formatActionNameToConstant, formatActionNameToCamel } from './format'
+import { formatUrlToActionName, formatActionNameToConstant, formatActionNameToCamel, formatActionToMutationSet } from './format'
 
 export function buildVuexParams({ basePath, paths, definitions }) {
   return _.chain(paths)
@@ -15,7 +15,7 @@ export function buildVuexParams({ basePath, paths, definitions }) {
         if (method === 'parameters') return;
         const { responses, parameters } = api
         const xVuexKey = api['x-vuex-key']
-        const actionName = formatUrlToActionName(fullUrl, method)
+        const actionName = formatUrlToActionName(fullUrl, method, true)
         const hasQuery = _.some(parameters, {in: 'query'})
         const hasBody = _.some(parameters, {in: 'body'})
         const stateKey = _.isString(xVuexKey) ? [[xVuexKey]] :
@@ -40,7 +40,7 @@ export function buildVuexParams({ basePath, paths, definitions }) {
           hasBody,
           actionName: formatActionNameToCamel(actionName),
           //mutationType: formatActionNameToConstant(actionName),
-          mutationType: formatActionToMutationSet(actionName),
+          mutationType: formatActionToMutationSet(formatUrlToActionName(fullUrl, method, false)),
           stateKey,
           args: args.join(', '),
           options: _.size(options) ? `{${options.join(', ')}}` : undefined,
