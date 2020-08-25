@@ -15,6 +15,14 @@ export function formatActionNameToConstant(actionName) {
   return Case.constant(actionName.join('_'))
 }
 
+export function formatActionToMutationSet(actionName) {
+  return {
+      setEntity: `${actionName}.byId.*`,
+      setEntityIsLoading: `${actionName}.isLoading`,
+      setEntityAPIError: `${actionName}.apiErrorMessage`,
+  }
+}
+
 export function formatActionNameToCamel(actionName) {
   return Case.camel(actionName.join('_'))
 }
