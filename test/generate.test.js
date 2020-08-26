@@ -14,6 +14,7 @@ describe('generateCode', ()=>{
       hasQuery: true,
       method: 'get',
       mutationType: 'GET_V2_USERS',
+        // TODO bad test
       stateKey: [['data', 'users'], ['total', 'usersTotalCount']],
       options: '{params: query}',
       url: '/v2/users',
