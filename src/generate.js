@@ -13,6 +13,7 @@ export function generateCode(actionParams) {
     // generateVuexArgs function
     //
     // - this needs to be permutated to be a set
+    // -- ${mutationType.root}
     // -- ${mutationType.setEntity}
     // -- ${mutationType.setEntityIsLoading}
     // -- ${mutationType.setEntityAPIError}
@@ -25,7 +26,7 @@ export function generateCode(actionParams) {
     // - given N entities, replace all in the tree?
     // - given a request for a filtered set
   return `export const types = [
-${actionParams.map(({ mutationType })=>`  '${mutationType}',`).join('\n')}
+${actionParams.map(({ mutationType })=>`  '${mutationType.root}',`).join('\n')}
 ].reduce(function(obj, val){ return Object.assign(obj, {[val]: val}) }, {})
 
 export let ajax = {}
@@ -57,3 +58,6 @@ ${stateKey.map(([ pKey, sKey ])=>(`    state.${sKey} = payload${pKey ? `['${pKey
 }
 `
 }
+// generate actions based on URLs
+// generate mutation keys that match vuex easy access scheme
+// generate state tree that matches definitions

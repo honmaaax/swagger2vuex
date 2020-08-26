@@ -1,2 +1,3 @@
  npm run build
- node bin/swagger2vuex.sh ./swagger-pets.yaml out/o.js
+ node --inspect-brk bin/swagger2vuex.sh ./swagger-pets.yaml out/o.js
+ #node bin/swagger2vuex.sh ./swagger-pets.yaml out/o.js
